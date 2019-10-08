@@ -1,0 +1,23 @@
+{
+  "name": "pixi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "bulma": "^0.7.5",
+    "pixi.js": "^5.1.5",
+    "rxjs": "^6.5.3"
+  },
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.11.2",
+    "parcel-bundler": "^1.12.3",
+    "sass": "^1.23.0"
+  },
+  "scripts": {
+    "start": "parcel index.html --open",
+    "build": "parcel build index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
