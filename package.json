@@ -6,7 +6,8 @@
   "dependencies": {
     "bulma": "^0.7.5",
     "pixi.js": "^5.1.5",
-    "rxjs": "^6.5.3"
+    "rxjs": "^6.5.3",
+    "uuid": "^3.3.3"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.11.2",
