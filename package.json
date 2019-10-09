@@ -1,0 +1,32 @@
+{
+  "name": "notes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "concurrently": "^5.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.7.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js",
+    "server": "nodemon server.js",
+    "dev-client": "cd client && npm start",
+    "dev": "concurrently \"npm run server\" \"npm run dev-client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/max-razhnov/notes.git"
+  },
+  "author": "max razhnov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/max-razhnov/notes/issues"
+  },
+  "homepage": "https://github.com/max-razhnov/notes#readme"
+}
