@@ -1,22 +1,13 @@
 #app {
-  font-family: "Roboto";
-  //   display: flex;
-  //   justify-content: space-between;
-  max-width: 80vw;
-}
-
-section {
-  //   display: flex;
-  //   flex-direction: column;
-  //   justify-content: space-between;
-  & > form {
+  & > .field {
+    justify-content: space-between;
     display: flex;
-    flex-direction: column;
-
-    & > input {
-      max-width: 300px;
+    & > .field {
+      max-width: 40%;
       width: 100%;
-      margin-bottom: 10px;
     }
   }
+}
+.card {
+    max-width: 30%;height: fit-content;
 }
