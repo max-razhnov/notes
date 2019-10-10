@@ -6,8 +6,8 @@ import Card from "./src/components/Card";
 
 let initObj = {
   id: "",
-  name: "",
-  email: "",
+  userName: "",
+  userEmail: "",
   title: "",
   noteData: "",
   date: null
@@ -24,7 +24,7 @@ const mainField = document.getElementsByClassName("field")[0];
     item.onchange = ev => {
       if (ev.currentTarget.value.trim()) {
         obj[ev.currentTarget.id] = ev.currentTarget.value.trim();
-        if (obj.title && obj.name && obj.email && obj.noteData) {
+        if (obj.title && obj.userName && obj.userEmail && obj.noteData) {
           buttonAdd.removeAttribute("disabled");
         }
       } else {
