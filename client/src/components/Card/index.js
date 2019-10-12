@@ -14,17 +14,17 @@ const Card = props => {
           <div class="card-content">
             <div class="content">
               <span>${props.noteData}</span>. <br />
-              <span style="font-weight: bold;">${props.name.toUpperCase()}</span> <br />
-              <span style="font-weight: bold;">${props.email}</span>
+              <span style="font-weight: bold;">${props.userName.toUpperCase()}</span> <br />
+              <span style="font-weight: bold;">${props.userEmail}</span>
               <br />
-              <time datetime="2016-1-1">
+              <time>
               ${date.getHours()}:${date.getMinutes()} - ${date.getDate()}/${date.getMonth()}/${date.getFullYear()}
               </time>
             </div>
           </div>
           <footer class="card-footer">
             <a href="#" class="card-footer-item">Save</a>
-            <a href="#" class="card-footer-item">Edit</a>
+            <!--<a href="#" class="card-footer-item">Edit</a>-->
             <a href="#" class="card-footer-item">Delete</a>
           </footer>
         </div>`;

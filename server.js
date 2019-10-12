@@ -2,7 +2,8 @@ const PORT = process.env.PORT || 5000;
 const bodyParser = require("body-parser");
 const express = require("express");
 const connectDatabase = require("./database/lib/connectDB");
-const noteMethodFactory = require("./database/factories/notesFactory");
+const notesFactory = require("./database/factories/notesFactory");
+const DBController = require("./database/dbController");
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -10,19 +11,41 @@ app.use(bodyParser.json());
 
 connectDatabase();
 
-// replace for api query
-noteMethodFactory({
-  id: "abc",
-  userName: "Max Razhnov",
-  userEmail: "qwerty@gmail.com",
-  title: "Course",
-  noteData: "First Note",
-  date: 123456789
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  next();
 });
 
-app.use("/", (req, res) => {
-  const mes = "Server starts";
-  return res.send(mes);
+app.get("/", (req, res) => {
+  const dbController = new DBController("Note");
+  dbController
+    .getAllNotes()
+    .then(notesList => res.status(200).json(notesList))
+    .catch(e => res.status(404).send(e));
+});
+
+app.post("/", (req, res) => {
+  const dbController = new DBController("Note");
+
+  if (req.body) {
+    dbController
+      .postNewNote(req.body)
+      .then(newNote => res.status(200).json(newNote))
+      .catch(e => res.status(404).send(e));
+  }
+});
+
+app.delete("/", (req, res) => {
+  const dbController = new DBController("Note");
+  dbController
+    .deleteAllNotes()
+    .then(data => res.status(200).json(data))
+    .catch(e => res.status(404).send(e));
 });
 
 app.listen(PORT, () => {

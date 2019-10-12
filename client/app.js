@@ -1,8 +1,8 @@
 import "bulma";
 import "./src/styles/styles.scss";
 import uuidv1 from "uuid/v1";
-import axios from "axios";
 import Card from "./src/components/Card";
+import { deleteAllNotes, postData, getAllNotes } from "./src/api";
 
 let initObj = {
   id: "",
@@ -13,13 +13,14 @@ let initObj = {
   date: null
 };
 
-const obj = { ...initObj };
+let obj = { ...initObj };
 const inputs = [...document.getElementsByClassName("input")];
 const buttonAdd = document.getElementsByClassName("button is-primary")[0];
+const buttonDelAll = document.getElementsByClassName("button is-danger")[0];
+const notesContainer = document.getElementsByClassName("notes")[0];
 buttonAdd.setAttribute("disabled", "disabled");
-const mainField = document.getElementsByClassName("field")[0];
 
-(function() {
+const app = async () => {
   inputs.forEach(item => {
     item.onchange = ev => {
       if (ev.currentTarget.value.trim()) {
@@ -33,19 +34,34 @@ const mainField = document.getElementsByClassName("field")[0];
     };
   });
 
-  buttonAdd.onclick = () => {
+  const dataNotes = await getAllNotes();
+  if (dataNotes.length === 0) {
+    notesContainer.innerHTML = `<h3 id="empty" class="title">Sorry, now database is empty</h3>`;
+  }
+  dataNotes.forEach(noteItem => {
+    notesContainer.innerHTML = "";
+    notesContainer.innerHTML += Card(noteItem);
+  });
+
+  buttonAdd.onclick = async () => {
     inputs.forEach(item => {
       item.value = "";
     });
     obj.id = uuidv1();
     obj.date = +(Date.now() / 1000).toFixed();
-    console.log(obj);
-    mainField.insertAdjacentHTML("beforeend", Card(obj));
-    //    query to API
-
-    const query = axios
-      .post(`/submit?${obj.id}`)
-      .then(res => console.log(res))
-      .catch(e => console.log(e));
+    const dataResult = await postData(obj);
+    obj = Object.assign({}, initObj);
+    buttonAdd.setAttribute("disabled", "disabled");
+    document.getElementById("empty").remove();
+    notesContainer.innerHTML += Card(dataResult);
   };
+
+  buttonDelAll.onclick = () => {
+    deleteAllNotes();
+    window.location.reload();
+  };
+};
+
+(function() {
+  app();
 })();
