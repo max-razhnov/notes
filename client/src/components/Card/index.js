@@ -1,3 +1,5 @@
+import { timeConvert, dateConvert } from "../../helpers";
+
 const Card = props => {
   const date = new Date(props.date * 1000);
   return `<div class="card">
@@ -18,7 +20,7 @@ const Card = props => {
               <span style="font-weight: bold;">${props.userEmail}</span>
               <br />
               <time>
-              ${date.getHours()}:${date.getMinutes()} - ${date.getDate()}/${date.getMonth()}/${date.getFullYear()}
+              ${timeConvert(date)} - ${dateConvert(date)}
               </time>
             </div>
           </div>
