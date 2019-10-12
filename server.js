@@ -2,7 +2,6 @@ const PORT = process.env.PORT || 5000;
 const bodyParser = require("body-parser");
 const express = require("express");
 const connectDatabase = require("./database/lib/connectDB");
-const notesFactory = require("./database/factories/notesFactory");
 const DBController = require("./database/dbController");
 
 const app = express();

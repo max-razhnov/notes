@@ -39,7 +39,6 @@ const app = async () => {
     notesContainer.innerHTML = `<h3 id="empty" class="title">Sorry, now database is empty</h3>`;
   }
   dataNotes.forEach(noteItem => {
-    notesContainer.innerHTML = "";
     notesContainer.innerHTML += Card(noteItem);
   });
 
@@ -52,7 +51,10 @@ const app = async () => {
     const dataResult = await postData(obj);
     obj = Object.assign({}, initObj);
     buttonAdd.setAttribute("disabled", "disabled");
-    document.getElementById("empty").remove();
+    const title = document.getElementById("empty");
+    if (title) {
+      title.remove();
+    }
     notesContainer.innerHTML += Card(dataResult);
   };
 
