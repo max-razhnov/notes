@@ -21,12 +21,17 @@ const postData = obj => {
     .then(res => res.data)
     .catch(e => console.error(e));
 };
+//
+// const deleteOne = id => {
+//   return axios
+//     .post(`${URL}/${id}`)
+//     .then(res => res.data)
+//     .catch(e => console.error(e));
+// };
 
-const deleteOne = id => {
-  return axios
-    .post(URL, id)
-    .then(res => res.data)
-    .catch(e => console.error(e));
+export {
+  getAllNotes,
+  postData,
+  deleteAllNotes
+  // deleteOne
 };
-
-export { getAllNotes, postData, deleteAllNotes };

@@ -2,7 +2,12 @@ import "bulma";
 import "./src/styles/styles.scss";
 import uuidv1 from "uuid/v1";
 import Card from "./src/components/Card";
-import { deleteAllNotes, postData, getAllNotes } from "./src/api";
+import {
+  deleteAllNotes,
+  postData,
+  getAllNotes
+  // deleteOne
+} from "./src/api";
 
 let initObj = {
   id: "",
@@ -35,13 +40,26 @@ const app = async () => {
   });
 
   const dataNotes = await getAllNotes();
-  if (dataNotes.length === 0) {
-    notesContainer.innerHTML = `<h3 id="empty" class="title">Sorry, now database is empty</h3>`;
+  checkData();
+  function checkData() {
+    if (dataNotes.length === 0) {
+      notesContainer.innerHTML = `<h3 id="empty" class="title">Sorry, now database is empty</h3>`;
+    }
+    dataNotes.forEach(noteItem => {
+      notesContainer.innerHTML += Card(noteItem);
+    });
   }
-  dataNotes.forEach(noteItem => {
-    notesContainer.innerHTML += Card(noteItem);
-  });
-
+  // if (dataNotes.length > 0) {
+  //   //   const buttonDelOne = document.getElementsByClassName("card-footer")[0];
+  //   //   buttonDelOne.onclick = async () => {
+  //   //     const card = document.getElementById(buttonDelOne.id);
+  //   //     const data = await deleteOne(`${card.id}`);
+  //   //     console.log(data);
+  //   //     if (data === "ok") {
+  //   //       card.remove();
+  //   //     }
+  //   //   };
+  //   // }
   buttonAdd.onclick = async () => {
     inputs.forEach(item => {
       item.value = "";
@@ -58,9 +76,14 @@ const app = async () => {
     notesContainer.innerHTML += Card(dataResult);
   };
 
-  buttonDelAll.onclick = () => {
-    deleteAllNotes();
-    window.location.reload();
+  buttonDelAll.onclick = async () => {
+    const data = await deleteAllNotes();
+    if (data.length === 0) {
+      while (notesContainer.firstChild) {
+        notesContainer.removeChild(notesContainer.firstChild);
+      }
+      notesContainer.innerHTML = `<h3 id="empty" class="title">Sorry, now database is empty</h3>`;
+    }
   };
 };
 

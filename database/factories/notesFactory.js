@@ -26,10 +26,20 @@ function notesFactory(modelName) {
     });
   };
 
+  const deleteOne = id => {
+    return new Promise((res, rej) => {
+      NoteModel.deleteOne({ id: id }, err => {
+        if (err) rej(err);
+        res("ok");
+      });
+    });
+  };
+
   return {
     getAllNotes,
     postNewNote,
-    deleteAllNotes
+    deleteAllNotes,
+    deleteOne
   };
 }
 

@@ -47,6 +47,16 @@ app.delete("/", (req, res) => {
     .catch(e => res.status(404).send(e));
 });
 
+// app.post("/:id", (req, res) => {
+//   const dbController = new DBController("Note");
+//   if (req.params.id) {
+//     dbController
+//       .deleteOne(req.params.id)
+//       .then(data => res.status(200).json(data))
+//       .catch(e => console.error(e));
+//   }
+// });
+
 app.listen(PORT, () => {
   console.log(`server start on ${PORT} port`);
 });

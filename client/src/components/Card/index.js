@@ -2,7 +2,7 @@ import { timeConvert, dateConvert } from "../../helpers";
 
 const Card = props => {
   const date = new Date(props.date * 1000);
-  return `<div class="card">
+  return `<div id=${props.id} class="card">
           <header class="card-header">
             <p class="card-header-title">
               ${props.title.toUpperCase()}
@@ -24,8 +24,8 @@ const Card = props => {
               </time>
             </div>
           </div>
-          <footer class="card-footer">
-            <a href="#" class="card-footer-item">Save</a>
+          <footer id=${props.id} class="card-footer">
+            <!--<a href="#" class="card-footer-item">Save</a>-->
             <a href="#" class="card-footer-item">Delete</a>
           </footer>
         </div>`;
