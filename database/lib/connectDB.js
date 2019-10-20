@@ -1,8 +1,12 @@
 const mongoose = require("mongoose");
+const MONGO_URI =
+  process.env.MONGOLAB_URI ||
+  process.env.MONGOHQ_URL ||
+  "mongodb://localhost/notesDB";
 
 const connectDatabase = () => {
   mongoose
-    .connect("mongodb://localhost/notesDB", {
+    .connect(MONGO_URI, {
       useNewUrlParser: true,
       useCreateIndex: true,
       useUnifiedTopology: true
